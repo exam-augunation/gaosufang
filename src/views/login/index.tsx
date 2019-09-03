@@ -1,30 +1,45 @@
 import {Button, Checkbox,Form, Icon, Input  } from 'antd';
-import { FormComponentProps } from 'antd/lib/form';
 
+import {WrappedFormUtils} from 'antd/lib/form/Form'
 import * as React from 'react';
 import './sass/style.css'
-interface UserFormProps extends FormComponentProps {
-  age: number;
-  name: string;
+import {inject, observer} from 'mobx-react'
+
+interface Props {
+  form: WrappedFormUtils,
+  user: any,
+  abc?: string,
+  history:any
 }
-class Login extends React.Component<UserFormProps, any> {
+@inject('user')
+@observer
+
+class Login extends React.Component<Props, any> {
   public handleSubmit = (e: { preventDefault: () => void; }) => {
     e.preventDefault();
-    this.props.form.validateFields((err: any, values: any) => {
+    this.props.form.validateFields(async(err: any, values: any) => {
       if (!err) {
         console.log('Received values of form: ', values);
+        const result = await this.props.user.login(values);
+        console.log(result)
+        console.log('result...', result);
+        if (result === 1){
+          console.log(this.props)
+          this.props.history.push('/home')
+        }else{
+          console.log(1)
+        }
       }
     });
   };
     public render() {
-      console.log(this.props)
       const { getFieldDecorator } = this.props.form
       
       return (
         <div className='form-box'>
         <Form onSubmit={this.handleSubmit} className="login-form">
           <Form.Item>
-          {getFieldDecorator('username', {
+          {getFieldDecorator('user_name', {
             rules: [{ required: true, message: 'Please input your username!' }],
           })(
             <Input
@@ -36,7 +51,7 @@ class Login extends React.Component<UserFormProps, any> {
           
         </Form.Item>
         <Form.Item>
-          {getFieldDecorator('password', {
+          {getFieldDecorator('user_pwd', {
             rules: [{ required: true, message: 'Please input your Password!' }],
           })(
             <Input
@@ -69,4 +84,4 @@ class Login extends React.Component<UserFormProps, any> {
       );
     }
   }
-export default Form.create({ name: 'normal_login' })(Login)
+export default Form.create()(Login)

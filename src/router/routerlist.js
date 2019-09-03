@@ -13,6 +13,8 @@ const routes = [{
     children: [{
         component: Rank,
         path: '/home/rank',
+    },{
+    
     }],
     component: Home,
     path: '/home'

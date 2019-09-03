@@ -27,3 +27,12 @@ yarn start||npm run start
     },
   }
 ```
+###路由
+```js
+yarn add react-router-dom -D
+```
+###mobx
+```js
+yarn add mobx -D
+yarn add mobx-react -D
+```
