@@ -36,3 +36,7 @@ yarn add react-router-dom -D
 yarn add mobx -D
 yarn add mobx-react -D
 ```
+```js
+import {observable,action} from 'mobx'
+import {Provider} from 'mobx-react'
+```
