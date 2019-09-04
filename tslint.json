@@ -26,5 +26,12 @@
       "node_modules/**/*.ts",
       "coverage/lcov-report/*.js"
     ]
-  }
+  },
+  "jsRules": {
+    "object-literal-sort-keys": false
+},
+  "comment-format": [
+  true,
+  "check-space"
+  ]
 }

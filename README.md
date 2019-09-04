@@ -53,6 +53,7 @@ tslint.json一些配置
     "only-arrow-functions": [
       false
     ],
+    //不按字母大小写排序
     "object-literal-sort-keys":false,
     "member-assess":false,
     "ordered-imports":[
@@ -61,6 +62,16 @@ tslint.json一些配置
         "import-sources-order":"lowercase-last",
         "named-imports-order":"lowercase-first"
       }
-    ]
+    ],
+    //搭配js时不按字母大小写排序
+     "jsRules": {
+    "object-literal-sort-keys": false
+    },
+    //注释前不需要空格
+     "comment-format": [
+      true,
+      "check-space"
+    ],
+
   },
 ```

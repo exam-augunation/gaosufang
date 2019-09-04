@@ -5,15 +5,15 @@ export default class Routerview extends Component {
         const {routes}=this.props
         return (
             <Switch>
-        {routes.map((item,index)=>{
-            if(!item.redirect){
-                return <Route key={index} path={item.path} render={(props)=>{
-                    return <item.component path={item.children} {...props}></item.component>
-                }}></Route>
-            }else{
-                return <Redirect key={index}  from={item.path} to={item.redirect}></Redirect>
-            }
-        })}
+       {routes.map((item,index)=>{
+                if(!item.redirect){
+                    return <Route key={index} path={item.path} render={(props)=>{
+                      return  <item.component routes={item.children} {...props}></item.component>
+                    }}></Route>
+                }else{
+                    return <Redirect key={index} from={item.path} to={item.redirect}></Redirect>
+                }
+            })}
     </Switch>
         )
     }
