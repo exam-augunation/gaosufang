@@ -1,4 +1,5 @@
 export interface LoginForm{
+    remember: any;
     user_name: string,
     user_pwd: string
 }

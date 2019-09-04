@@ -1,4 +1,4 @@
-import {Button, Checkbox,Form, Icon, Input  } from 'antd';
+import {Button, Checkbox,Form, Icon, Input,message  } from 'antd';
 
 import {WrappedFormUtils} from 'antd/lib/form/Form'
 import * as React from 'react';
@@ -21,25 +21,31 @@ class Login extends React.Component<Props, any> {
       if (!err) {
         console.log('Received values of form: ', values);
         const result = await this.props.user.login(values);
-        console.log(result)
         console.log('result...', result);
+        // const {code,msg}=await this.props.user.login(values)
+        // console.log(msg)
         if (result === 1){
-          console.log(this.props)
-          this.props.history.push('/home')
+        
+            message.success('login success!')
+            this.props.history.push('/home')
+          
+          
         }else{
-          console.log(1)
+          message.error('login success!')
         }
       }
     });
   };
     public render() {
       const { getFieldDecorator } = this.props.form
-      
+      console.log(this.props.form)
+      const {user_name,user_pwd}=this.props.user.account
       return (
         <div className='form-box'>
         <Form onSubmit={this.handleSubmit} className="login-form">
           <Form.Item>
           {getFieldDecorator('user_name', {
+             initialValue:user_name,
             rules: [{ required: true, message: 'Please input your username!' }],
           })(
             <Input
@@ -52,6 +58,7 @@ class Login extends React.Component<Props, any> {
         </Form.Item>
         <Form.Item>
           {getFieldDecorator('user_pwd', {
+             initialValue: user_pwd,
             rules: [{ required: true, message: 'Please input your Password!' }],
           })(
             <Input
@@ -69,10 +76,10 @@ class Login extends React.Component<Props, any> {
             valuePropName: 'checked'
             
           })( <Checkbox>记住密码</Checkbox>)}
-         
-          <a className="login-form-forgot" href="">
-           忘记密码
-          </a>
+         {getFieldDecorator('autoLogin', {
+            valuePropName: 'checked',
+            initialValue: true,
+          })(<Checkbox>Auto login in 7 days</Checkbox>)}
           <Button type="primary" htmlType="submit" className="login-form-button">
             登陆
           </Button>
