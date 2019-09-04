@@ -15,6 +15,8 @@ yarn start||npm run start
 -引入路由
 -引入mobox
 -引入antd
+
+
 ##配置别名
 -tsconfig.json
 ```js
@@ -39,4 +41,26 @@ yarn add mobx-react -D
 ```js
 import {observable,action} from 'mobx'
 import {Provider} from 'mobx-react'
+```
+tslint.json一些配置
+可以使用console.log 不按字母新后顺序设为false 等等
+```js
+"rules": {
+    "interface-name" : [true, "never-prefix"],
+    "no-console": [
+      false
+    ],
+    "only-arrow-functions": [
+      false
+    ],
+    "object-literal-sort-keys":false,
+    "member-assess":false,
+    "ordered-imports":[
+      false,
+      {
+        "import-sources-order":"lowercase-last",
+        "named-imports-order":"lowercase-first"
+      }
+    ]
+  },
 ```
