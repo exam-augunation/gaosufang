@@ -18,7 +18,8 @@
         "import-sources-order":"lowercase-last",
         "named-imports-order":"lowercase-first"
       }
-    ]
+    ],
+    "member-ordering": false
   },
   "linterOptions": {
     "exclude": [
