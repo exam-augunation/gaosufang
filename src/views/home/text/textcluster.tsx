@@ -30,8 +30,6 @@ class Textcluster extends React.Component<Props> {
   }
   public render() {
     const { list } = this.state
-    console.log(list)
-    //  console.log(result)
     return (
       <div className="box">
         <h2>试题分类</h2>

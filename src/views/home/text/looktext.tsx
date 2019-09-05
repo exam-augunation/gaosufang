@@ -8,9 +8,9 @@ interface Props {
   allquestion: any,
   subject: any,
   result: any,
-  question:any
+  question: any
 }
-@inject('allquestion', 'subject','question')
+@inject('allquestion', 'subject', 'question')
 @observer
 
 class Looktext extends React.Component<Props>{
@@ -23,7 +23,7 @@ class Looktext extends React.Component<Props>{
     list: [],
     top_list: [],
     typelist: [],
-    typelist_bot:[]
+    typelist_bot: []
   }
   public getList = async () => {
     const { getAllQuestion } = this.props.allquestion
@@ -41,14 +41,14 @@ class Looktext extends React.Component<Props>{
       list: result,
       top_list: subresult,
       typelist: typeresult,
-      typelist_bot:resulttype
+      typelist_bot: resulttype
     })
   }
   public render() {
-    const { list, top_list, typelist , typelist_bot} = this.state
+    const { list, top_list, typelist, typelist_bot } = this.state
     return (
       <div className="box">
-       
+
         <h2>查看试题</h2>
         <div className="top_content">
           课程类型:{top_list.length && top_list.map((item: any) => <span key={item.subject_id}>
@@ -58,14 +58,13 @@ class Looktext extends React.Component<Props>{
             <span>
               考试类型:
               <Select defaultValue="" style={{ width: 200 }} >
-
                 {typelist.length && typelist.map((item: any) => <Option value={item.exam_name} key={item.exam_id}>{item.exam_name}</Option>)}
               </Select>
             </span>
             <span>
               题目类型:
               <Select defaultValue="" style={{ width: 200 }}>
-                { typelist_bot.length&& typelist_bot.map((item:any)=> <Option value={item.questions_type_text} key={item.questions_type_id}>{item.questions_type_text}</Option>)}
+                {typelist_bot.length && typelist_bot.map((item: any) => <Option value={item.questions_type_text} key={item.questions_type_id}>{item.questions_type_text}</Option>)}
               </Select>
             </span>
             <span><Button>查询</Button></span>
