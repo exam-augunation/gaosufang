@@ -1,15 +1,16 @@
 import * as React from 'react';
 import { inject, observer } from 'mobx-react'
 import './look.css'
-import { Button ,Select} from 'antd'
+import { Button, Select } from 'antd'
 const { Option } = Select;
 
 interface Props {
   allquestion: any,
   subject: any,
-  result: any
+  result: any,
+  question:any
 }
-@inject('allquestion', 'subject')
+@inject('allquestion', 'subject','question')
 @observer
 
 class Looktext extends React.Component<Props>{
@@ -17,58 +18,60 @@ class Looktext extends React.Component<Props>{
     super(props)
     this.getList()
   }
+
+  public state = {
+    list: [],
+    top_list: [],
+    typelist: [],
+    typelist_bot:[]
+  }
   public getList = async () => {
     const { getAllQuestion } = this.props.allquestion
-    const { getSubject } = this.props.subject
+    const { getSubject, getExamType } = this.props.subject
+    const { getQuestion } = this.props.question
     getAllQuestion()
     getSubject()
+    getExamType()
+    getQuestion()
     const result = await this.props.allquestion.getAllQuestion()
     const subresult = await this.props.subject.getSubject()
-    console.log(subresult)
+    const typeresult = await this.props.subject.getExamType()
+    const resulttype = await this.props.question.getQuestion()
     this.setState({
-      list: result
+      list: result,
+      top_list: subresult,
+      typelist: typeresult,
+      typelist_bot:resulttype
     })
   }
-  public state = {
-    list: []
-  }
-
   public render() {
-    const { list } = this.state
+    const { list, top_list, typelist , typelist_bot} = this.state
     return (
       <div className="box">
-        this is Looktext page
+       
         <h2>查看试题</h2>
-
         <div className="top_content">
-        课程类型:<span>All</span><span>javaScript下</span><span>模块化开发</span><span>移动端开发</span><span>node基础</span>
-            <span>组件化开发(vue)</span><span>组件化开发(react)</span><span>项目实战</span><span>javaScript高级</span><span>node高级</span>
-            <div className="m-input">
+          课程类型:{top_list.length && top_list.map((item: any) => <span key={item.subject_id}>
+            {item.subject_text}
+          </span>)}
+          <div className="m-input">
             <span>
               考试类型:
               <Select defaultValue="" style={{ width: 200 }} >
-                  <Option value="周考一">周考一</Option>
-                  <Option value="周考二">周考二</Option>
-                  <Option value="周考三">周考三</Option>
-                  <Option value="月考">月考</Option>
 
-
+                {typelist.length && typelist.map((item: any) => <Option value={item.exam_name} key={item.exam_id}>{item.exam_name}</Option>)}
               </Select>
             </span>
             <span>
               题目类型:
               <Select defaultValue="" style={{ width: 200 }}>
-                  <Option value="简答题">简答题</Option>
-                  <Option value="代码阅读题">代码阅读题</Option>
-                  <Option value="代码补全题">代码补全题</Option>
-                  <Option value="修改bug">修改bug</Option>
-                  <Option value="手写代码">手写代码</Option>
+                { typelist_bot.length&& typelist_bot.map((item:any)=> <Option value={item.questions_type_text} key={item.questions_type_id}>{item.questions_type_text}</Option>)}
               </Select>
-              </span>  
-              <span><Button>查询</Button></span>
+            </span>
+            <span><Button>查询</Button></span>
           </div>
-          </div>
-      
+        </div>
+
         <div className="bottom_con">
           <div className="bottom_content">
             {list.length && list.map((item: any, index: number) => <div className="dev" key={index}>
@@ -80,7 +83,6 @@ class Looktext extends React.Component<Props>{
                   <Button>{item.exam_name}</Button>
                 </ul>
                 <p className="dev_name"> <a href="">{item.user_name}发布</a></p>
-
               </div>
               <div className="dev_right">
                 <a href="">编辑</a>
