@@ -1,5 +1,5 @@
-##考试管理后台
-##启动项目
+## 考试管理后台
+##  启动项目
 -初始化
 ```js
 create-react-app exam-cms --scripts-version=react-scripts-ts
@@ -8,7 +8,7 @@ create-react-app exam-cms --scripts-version=react-scripts-ts
 ```js
 yarn start||npm run start
 ```
-##环境搭建
+## 环境搭建
 ```js
   npm install --save-dev @babel/plugin-proposal-decorators
 ```
@@ -17,7 +17,7 @@ yarn start||npm run start
 -引入antd
 
 
-##配置别名
+## 配置别名
 -tsconfig.json
 ```js
   "compilerOptions":{
@@ -29,11 +29,11 @@ yarn start||npm run start
     },
   }
 ```
-###路由
+### 路由
 ```js
 yarn add react-router-dom -D
 ```
-###mobx
+### mobx
 ```js
 yarn add mobx -D
 yarn add mobx-react -D

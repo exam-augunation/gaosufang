@@ -18,7 +18,6 @@ class Textcluster extends  React.Component<Props> {
   }
   public componentDidMount(){
     this.getList()
-
   }
   public getList=async ()=>{
     const { getQuestion } = this.props.question
